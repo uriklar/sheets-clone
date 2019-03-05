@@ -1,0 +1,14 @@
+.selected {
+  border: 2px solid #1973e7;
+}
+
+.input {
+  width: 100%;
+  padding-left: 2px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.cell {
+  padding-left: 2px;
+  white-space: nowrap;
+}

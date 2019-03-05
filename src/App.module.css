@@ -1,0 +1,13 @@
+.app {
+  display: grid;
+  grid-template-rows: 64px 40px 24px auto;
+  height: 100vh;
+}
+
+.toolBar {
+  background-color: aqua;
+}
+
+.grid {
+  background-color: yellow;
+}

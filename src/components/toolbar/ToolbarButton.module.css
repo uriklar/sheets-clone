@@ -1,0 +1,18 @@
+.container {
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container:hover {
+  background-color: #f8f9fa;
+  transition: ease-in-out 100ms;
+}
+
+.selected {
+  background-color: #e6f4ea;
+}

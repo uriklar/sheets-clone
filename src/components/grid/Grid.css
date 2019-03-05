@@ -1,0 +1,21 @@
+.grid-item {
+  border-right: 1px solid #c0c0c0;
+  border-bottom: 1px solid #c0c0c0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.grid-item.bold {
+  font-weight: bold;
+}
+
+.grid-item.italic {
+  font-style: italic;
+}
+
+.grid-item.strikethrough {
+  text-decoration: line-through;
+}
