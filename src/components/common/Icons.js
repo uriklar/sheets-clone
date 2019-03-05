@@ -4,7 +4,8 @@ const ICONS = {
   fx: FxIcon,
   bold: BoldIcon,
   italic: ItalicIcon,
-  strikethrough: StrikeThroughIcon
+  strikethrough: StrikeThroughIcon,
+  logo: Logo
 };
 
 export default function Icon({
@@ -67,5 +68,15 @@ function StrikeThroughIcon({ fill }) {
         transform="translate(2 3)"
       />
     </g>
+  );
+}
+
+function Logo() {
+  return (
+    <path
+      fill="url(#b)"
+      fillOpacity=".1"
+      d="M2.5 0H17l9 9v24.5c0 1.3807119-1.1192881 2.5-2.5 2.5h-21C1.11928813 36 0 34.8807119 0 33.5v-31C0 1.11928813 1.11928813 0 2.5 0z"
+    />
   );
 }

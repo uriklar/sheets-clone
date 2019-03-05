@@ -1,9 +1,10 @@
-import { observable, computed } from "mobx";
+import { observable, computed, action } from "mobx";
 
 export default class ContentStore {
   @observable cells = {};
   @observable selectedCell = { id: "A1", editable: false };
 
+  @action
   setCellProperty(id, property, value) {
     this.cells[id] = this.cells[id] || {};
     this.cells[id][property] = value;
@@ -13,10 +14,12 @@ export default class ContentStore {
     return this.cells[id] ? this.cells[id][property] : "";
   }
 
+  @action
   select(id) {
     this.selectedCell = { id };
   }
 
+  @action
   edit(id) {
     this.selectedCell = { id, editable: true };
   }

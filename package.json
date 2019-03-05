@@ -9,6 +9,7 @@
     "mobx-react-lite": "^1.1.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-google-login": "^5.0.2",
     "typeface-roboto": "^0.0.54"
   },
   "scripts": {
