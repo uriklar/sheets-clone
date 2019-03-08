@@ -6,9 +6,8 @@ import { db } from "../firebase";
 
 const userStore = new UserStore(db);
 const contentStore = new ContentStore({ db, userStore });
+const appStore = new AppStore({ db, userStore });
 
 export const UserStoreContext = React.createContext(userStore);
-
 export const ContentStoreContext = React.createContext(contentStore);
-export const AppStoreContext = React.createContext(new AppStore());
-//export const DbContext = React.createContext(db);
+export const AppStoreContext = React.createContext(appStore);

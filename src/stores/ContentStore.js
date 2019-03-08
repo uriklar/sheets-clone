@@ -7,6 +7,7 @@ export default class ContentStore {
   constructor({ db, userStore }) {
     this.db = db;
     this.userStore = userStore;
+    this.hydrateCells();
   }
 
   @action
@@ -14,11 +15,7 @@ export default class ContentStore {
     this.cells[id] = this.cells[id] || {};
     this.cells[id][property] = value;
 
-    if (this.userStore.user) {
-      this.db
-        .ref(`cells/${this.userStore.user.googleId}/${id}/${property}`)
-        .set(value);
-    }
+    this.db.ref(`cells/${this.userStore.userId}/${id}/${property}`).set(value);
   }
 
   getCellProperty(id, property) {
@@ -38,11 +35,11 @@ export default class ContentStore {
   @action
   hydrateCells() {
     return this.db
-      .ref(`cells/${this.userStore.user.googleId}`)
+      .ref(`cells/${this.userStore.userId}`)
       .once("value")
       .then(snapshot => {
         runInAction(() => {
-          this.cells = snapshot.val();
+          this.cells = snapshot.val() || {};
         });
       });
   }
