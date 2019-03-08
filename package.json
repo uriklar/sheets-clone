@@ -5,6 +5,7 @@
   "dependencies": {
     "@welldone-software/why-did-you-render": "^2.5.2",
     "custom-react-scripts": "0.2.2",
+    "firebase": "^5.8.6",
     "mobx": "^5.9.0",
     "mobx-react-lite": "^1.1.0",
     "netlify-cli": "^2.8.3",

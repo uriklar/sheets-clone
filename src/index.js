@@ -6,7 +6,7 @@ import whyDidYouRender from "@welldone-software/why-did-you-render";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-whyDidYouRender(React, { include: [/.*/], logOnDifferentValues: true });
+//whyDidYouRender(React, { include: [/.*/], logOnDifferentValues: true });
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

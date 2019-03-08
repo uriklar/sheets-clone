@@ -2,7 +2,13 @@ import React from "react";
 import ContentStore from "./ContentStore";
 import AppStore from "./AppStore";
 import UserStore from "./UserStore";
+import { db } from "../firebase";
 
-export const ContentStoreContext = React.createContext(new ContentStore());
+const userStore = new UserStore(db);
+const contentStore = new ContentStore({ db, userStore });
+
+export const UserStoreContext = React.createContext(userStore);
+
+export const ContentStoreContext = React.createContext(contentStore);
 export const AppStoreContext = React.createContext(new AppStore());
-export const UserStoreContext = React.createContext(new UserStore());
+//export const DbContext = React.createContext(db);

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserStoreContext } from "../../stores/Provider";
+import { UserStoreContext, ContentStoreContext } from "../../stores/Provider";
 import { observer } from "mobx-react-lite";
 
 import styles from "./Avatar.module.css";
@@ -34,14 +34,19 @@ function AvatarBorder() {
 }
 
 export default observer(function Avatar() {
-  const store = useContext(UserStoreContext);
+  const userStore = useContext(UserStoreContext);
+  const contentSstore = useContext(ContentStoreContext);
 
-  if (!store.user) {
+  if (!userStore.user) {
     return (
       <GoogleLogin
         clientId="723459482470-sgv8javd5coshgcdjaboc0k5ff0rk13r.apps.googleusercontent.com"
         buttonText="Login"
-        onSuccess={resp => console.log(resp) || store.setUser(resp.profileObj)}
+        onSuccess={resp => {
+          console.log(resp);
+          userStore.setUser(resp.profileObj);
+          contentSstore.hydrateCells();
+        }}
         onFailure={resp => console.log(resp)}
       />
     );
@@ -50,7 +55,11 @@ export default observer(function Avatar() {
   return (
     <div className={styles.container}>
       <AvatarBorder />
-      <img src={store.user.imageUrl} className={styles.image} alt="Avatar" />
+      <img
+        src={userStore.user.imageUrl}
+        className={styles.image}
+        alt="Avatar"
+      />
     </div>
   );
 });
