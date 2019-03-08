@@ -4,8 +4,8 @@ export default class ContentStore {
   @observable cells = {};
   @observable selectedCell = { id: "A1", editable: false };
 
-  constructor({ db, userStore }) {
-    this.db = db;
+  constructor({ dbStore, userStore }) {
+    this.dbStore = dbStore;
     this.userStore = userStore;
     this.hydrateCells();
   }
@@ -15,7 +15,10 @@ export default class ContentStore {
     this.cells[id] = this.cells[id] || {};
     this.cells[id][property] = value;
 
-    this.db.ref(`cells/${this.userStore.userId}/${id}/${property}`).set(value);
+    this.dbStore.write(
+      `cells/${this.userStore.userId}/${id}/${property}`,
+      value
+    );
   }
 
   getCellProperty(id, property) {
@@ -34,9 +37,8 @@ export default class ContentStore {
 
   @action
   hydrateCells() {
-    return this.db
-      .ref(`cells/${this.userStore.userId}`)
-      .once("value")
+    return this.dbStore
+      .read(`cells/${this.userStore.userId}`)
       .then(snapshot => {
         runInAction(() => {
           this.cells = snapshot.val() || {};

@@ -4,8 +4,8 @@ export default class UserStore {
   @observable imageUrl = null;
   @observable userId = null;
 
-  constructor(db) {
-    this.db = db;
+  constructor({ dbStore }) {
+    this.dbStore = dbStore;
     let userId = localStorage.getItem("GOOGLE_SHEETS_CLONE_USER_ID");
 
     if (userId) {
@@ -23,18 +23,15 @@ export default class UserStore {
   @action
   setAvatar(response) {
     this.imageUrl = response.profileObj.imageUrl;
-    this.db.ref(`avatars/${this.userId}`).set(this.imageUrl);
+    this.dbStore.write(`avatars/${this.userId}`, this.imageUrl);
   }
 
   @action
   hydrateUser(userId) {
-    return this.db
-      .ref(`avatars/${userId}`)
-      .once("value")
-      .then(snapshot => {
-        runInAction(() => {
-          this.imageUrl = snapshot.val();
-        });
+    return this.dbStore.read(`avatars/${userId}`).then(snapshot => {
+      runInAction(() => {
+        this.imageUrl = snapshot.val();
       });
+    });
   }
 }

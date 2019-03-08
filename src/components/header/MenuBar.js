@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DbStoreContext } from "../../stores/Provider";
 
 import styles from "./Header.module.css";
+import { observer } from "mobx-react-lite";
 
-export default function MenuBar() {
+export default observer(function MenuBar() {
+  const store = useContext(DbStoreContext);
   return (
     <div className={styles.menuBarContainer}>
       <div className={styles.menuItem}>File</div>
@@ -14,6 +17,9 @@ export default function MenuBar() {
       <div className={styles.menuItem}>Tools</div>
       <div className={styles.menuItem}>Add-ons</div>
       <div className={styles.menuItem}>Help</div>
+      <span clasName={styles.savingIndicator}>
+        {store.isSaving ? "Saving..." : "Changes saved in firebase"}
+      </span>
     </div>
   );
-}
+});

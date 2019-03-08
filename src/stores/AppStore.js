@@ -4,8 +4,8 @@ export default class AppStore {
   @observable sheetName = "";
   @observable rows = 10;
 
-  constructor({ db, userStore }) {
-    this.db = db;
+  constructor({ dbStore, userStore }) {
+    this.dbStore = dbStore;
     this.userStore = userStore;
     this.hydrateApp();
   }
@@ -14,7 +14,7 @@ export default class AppStore {
   setSheetName(name) {
     this.sheetName = name;
     document.title = `${name} - Google Sheets`;
-    this.db.ref(`appData/${this.userStore.userId}/sheetName`).set(name);
+    this.dbStore.write(`appData/${this.userStore.userId}/sheetName`, name);
   }
 
   @action
@@ -24,9 +24,8 @@ export default class AppStore {
 
   @action
   hydrateApp() {
-    return this.db
-      .ref(`appData/${this.userStore.userId}`)
-      .once("value")
+    return this.dbStore
+      .read(`appData/${this.userStore.userId}`)
       .then(snapshot => {
         runInAction(() => {
           const appData = snapshot.val();
