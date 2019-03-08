@@ -4,7 +4,6 @@ import styles from "./Header.module.css";
 import Avatar from "./Avatar";
 import SheetName from "./SheetName";
 import MenuBar from "./MenuBar";
-import GoogleLogin from "react-google-login";
 
 export default function Header() {
   return (

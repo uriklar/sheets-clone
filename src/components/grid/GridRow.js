@@ -1,9 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 
 import RowNumber from "./RowNumber";
 import Cell from "./Cell";
 
-export default function GridRow({ rowNumber, columns, contentStore }) {
+export default memo(function GridRow({ rowNumber, columns }) {
   return columns.map((column, i) => {
     const key = `${column}${rowNumber}`;
 
@@ -13,4 +13,4 @@ export default function GridRow({ rowNumber, columns, contentStore }) {
       <Cell key={key} id={key} />
     );
   });
-}
+});
